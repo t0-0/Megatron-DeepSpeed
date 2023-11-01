@@ -21,3 +21,13 @@ logs
 
 # Data folder
 bookcorpus_data/
+dataset/en_wiki_text_document.*
+dataset/gpt2-*
+dataset/index-cache/
+dataset/wiki_en_20231001_train.jsonl
+
+/ds_config_*.json
+
+output/
+
+/apex/

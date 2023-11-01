@@ -1,0 +1,15 @@
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch
+torchvision
+torchaudio
+
+pybind11
+six
+regex
+numpy
+
+deepspeed
+wandb
+tensorboard
+
+mpi4py

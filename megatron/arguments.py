@@ -58,6 +58,15 @@ def parse_args(extra_args_provider=None, ignore_unknown_args=False):
         args = parser.parse_args()
 
     # Args from environment
+    if args.use_mpi:
+        global_rank = int(os.environ['OMPI_COMM_WORLD_RANK'])
+        local_rank = int(os.environ['OMPI_COMM_WORLD_LOCAL_RANK'])
+        world_size = int(os.environ['OMPI_COMM_WORLD_SIZE'])
+
+        os.environ['RANK'] = str(global_rank)
+        os.environ['LOCAL_RANK'] = str(local_rank)
+        os.environ['WORLD_SIZE'] = str(world_size)
+
     args.rank = int(os.getenv('RANK', '0'))
     args.world_size = int(os.getenv("WORLD_SIZE", '1'))
 
@@ -1149,6 +1158,7 @@ def _add_distributed_args(parser):
                        'affects the encoder embedding.)')
     group.add_argument('--use-distributed-optimizer', action='store_true',
                        help='Use distributed optimizer.')
+    group.add_argument('--use-mpi', action='store_true', default=False, help='Use MPI for launching')
 
     return parser
 
